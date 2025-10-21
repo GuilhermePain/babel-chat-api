@@ -55,8 +55,6 @@ export const getUserByIdService = async (id: number) => {
 
         return new ReturnUserDto(user);
     } catch (error) {
-        console.log(error);
-
         throw new ApiError("Houve um erro interno ao buscar usuário.", 500);
     }
 };
