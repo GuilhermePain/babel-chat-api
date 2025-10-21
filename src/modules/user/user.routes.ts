@@ -5,12 +5,13 @@ import {
     getUserByIdController,
     updateUserController
 } from "./user.controller";
+import { auth } from "../../middlewares/auth";
 
 const routes = Router();
 
 routes.post("/", createUserController);
-routes.get("/", getAllUsersController);
-routes.get("/:id", getUserByIdController);
-routes.patch("/:id", updateUserController);
+routes.get("/", auth, getAllUsersController);
+routes.get("/:id", auth, getUserByIdController);
+routes.patch("/:id", auth, updateUserController);
 
 export default routes;
