@@ -14,7 +14,7 @@ export const userPathsSwagger = {
             },
             responses: {
                 201: {
-                    description: "Usuário criado com sucesso",
+                    description: "Usuário criado com sucesso.",
                     content: {
                         "application/json": {
                             schema: {
@@ -25,7 +25,7 @@ export const userPathsSwagger = {
                     },
                 },
                 400: {
-                    description: "Erro de validação",
+                    description: "Erro de validação.",
                     content: {
                         "application/json": {
                             schema: {
@@ -36,7 +36,15 @@ export const userPathsSwagger = {
                     },
                 },
                 500: {
-                    description: "Erro interno ao criar usuário",
+                    description: "Erro interno ao criar usuário.",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: "object",
+                                example: { statusCode: 500, message: "Houve um erro interno ao criar usuário." },
+                            },
+                        },
+                    },
                 },
             },
         },
@@ -45,6 +53,7 @@ export const userPathsSwagger = {
             summary: "Lista todos os usuários",
             description: "Retorna uma lista de todos os usuários cadastrados no sistema.",
             tags: ["Users"],
+            security: [{ bearerAuth: [] }],
             responses: {
                 200: {
                     description: "Lista de usuários retornada com sucesso",
@@ -57,8 +66,27 @@ export const userPathsSwagger = {
                         },
                     },
                 },
+                401: {
+                    description: "Acesso não autorizado — Token ausente, inválido ou expirado.",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: "object",
+                                example: { statusCode: 401, message: "Acesso não autorizado." },
+                            },
+                        },
+                    },
+                },
                 500: {
-                    description: "Erro interno ao buscar usuários",
+                    description: "Erro interno ao buscar usuários.",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: "object",
+                                example: { statusCode: 500, message: "Houve um erro interno ao buscar todos os usuários." },
+                            },
+                        },
+                    },
                 },
             },
         },
@@ -69,6 +97,7 @@ export const userPathsSwagger = {
             summary: "Busca usuário por ID",
             description: "Retorna os dados de um usuário específico pelo seu ID.",
             tags: ["Users"],
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     name: "id",
@@ -81,15 +110,26 @@ export const userPathsSwagger = {
             ],
             responses: {
                 200: {
-                    description: "Usuário encontrado com sucesso",
+                    description: "Usuário encontrado com sucesso.",
                     content: {
                         "application/json": {
                             schema: { $ref: "#/components/schemas/ReturnUserDto" },
                         },
                     },
                 },
+                401: {
+                    description: "Acesso não autorizado — Token ausente, inválido ou expirado.",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: "object",
+                                example: { statusCode: 401, message: "Acesso não autorizado." },
+                            },
+                        },
+                    },
+                },
                 404: {
-                    description: "Usuário não encontrado",
+                    description: "Usuário não encontrado.",
                     content: {
                         "application/json": {
                             schema: {
@@ -100,7 +140,15 @@ export const userPathsSwagger = {
                     },
                 },
                 500: {
-                    description: "Erro interno ao buscar usuário",
+                    description: "Erro interno ao buscar usuário.",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: "object",
+                                example: { statusCode: 500, message: "Houve um erro interno ao buscar usuário." },
+                            },
+                        },
+                    },
                 },
             },
         },
@@ -109,6 +157,7 @@ export const userPathsSwagger = {
             summary: "Atualiza usuário por ID",
             description: "Atualiza as informações de um usuário específico.",
             tags: ["Users"],
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     name: "id",
@@ -129,7 +178,7 @@ export const userPathsSwagger = {
             },
             responses: {
                 200: {
-                    description: "Usuário atualizado com sucesso",
+                    description: "Usuário atualizado com sucesso.",
                     content: {
                         "application/json": {
                             schema: {
@@ -139,8 +188,19 @@ export const userPathsSwagger = {
                         },
                     },
                 },
+                401: {
+                    description: "Acesso não autorizado — Token ausente, inválido ou expirado.",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: "object",
+                                example: { statusCode: 401, message: "Acesso não autorizado." },
+                            },
+                        },
+                    },
+                },
                 404: {
-                    description: "Usuário não encontrado",
+                    description: "Usuário não encontrado.",
                     content: {
                         "application/json": {
                             schema: {
@@ -151,7 +211,15 @@ export const userPathsSwagger = {
                     },
                 },
                 500: {
-                    description: "Erro interno ao atualizar usuário",
+                    description: "Erro interno ao atualizar usuário.",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: "object",
+                                example: { statusCode: 500, message: "Houve um erro interno ao atualizar usuário." },
+                            },
+                        },
+                    },
                 },
             },
         },
@@ -184,8 +252,6 @@ export const userSchemas = {
             id: { type: "integer", example: 1 },
             name: { type: "string", example: "João da Silva" },
             email: { type: "string", example: "joao@email.com" },
-            createdAt: { type: "string", format: "date-time" },
-            updatedAt: { type: "string", format: "date-time" },
         },
     },
 };
