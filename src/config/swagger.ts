@@ -1,5 +1,6 @@
 import swaggerJSDoc from "swagger-jsdoc";
 import { userPathsSwagger, userSchemas } from "../modules/user/user.swagger";
+import { authPathsSwagger, authSchemas } from "../modules/auth/auth.swagger";
 
 const swaggerDefinition = {
     openapi: "3.0.0",
@@ -12,11 +13,21 @@ const swaggerDefinition = {
         { url: "http://localhost:3355" },
     ],
     paths: {
-        ...userPathsSwagger
+        ...userPathsSwagger,
+        ...authPathsSwagger
     },
     components: {
+        securitySchemes: {
+            bearerAuth: {
+                type: "http",
+                scheme: "bearer",
+                bearerFormat: "JWT",
+                description: "Insira o token JWT gerado no login.",
+            },
+        },
         schemas: {
-            ...userSchemas
+            ...userSchemas,
+            ...authSchemas
         },
     },
 };
