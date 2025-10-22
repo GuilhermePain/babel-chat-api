@@ -1,5 +1,5 @@
 export const authPathsSwagger = {
-    "/login": {
+    "/auth/login": {
         post: {
             summary: "Autenticação de usuário",
             description:
